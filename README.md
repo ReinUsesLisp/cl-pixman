@@ -9,9 +9,15 @@ so feel free to contribute.
 
 ## Installation
 If you are using [Quicklisp](http://www.quicklisp.org/beta/):  
-`$ cd <your quicklisp directory>/local-projects/`  
-`$ git clone <me>`  
-Then you can just `(ql:quickload "pixman")` in your REPL.
+```bash
+cd <your quicklisp directory>/local-projects/  
+git clone <me>  
+```
+Then you can just
+```
+(ql:quickload "pixman")
+```
+in your REPL.  
 It was tested to work on SBCL using GNU/Linux on a x86 machine.
 
 You'll need a `pixman` shared object accessible to your Lisp at runtime,
