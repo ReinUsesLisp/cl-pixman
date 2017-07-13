@@ -18,7 +18,7 @@ Then you can just
 (ql:quickload "pixman")
 ```
 in your REPL.  
-It was tested to work on SBCL using GNU/Linux on a x86 machine.
+It was tested on SBCL using GNU/Linux on a x86 machine.
 
 You'll need a `pixman` shared object accessible to your Lisp at runtime,
 if you are using GNU, you can use your distro package.
