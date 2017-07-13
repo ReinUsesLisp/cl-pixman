@@ -16,7 +16,7 @@
 ;;;;
 
 (asdf:defsystem #:pixman
-  :description "Bindings for Pixman using CFFI."
+  :description "Low-level pixel manipulation."
   :author "ReinUsesLisp <reinuseslisp@airmail.cc>"
   :license "LLGPL"
   :depends-on (:cffi :trivial-garbage)
