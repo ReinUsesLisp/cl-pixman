@@ -24,8 +24,8 @@ You'll need a `pixman` shared object accessible to your Lisp at runtime,
 if you are using GNU, you can use your distro package.
 Darwin and Windows were not tested yet.
 
-## TODO list
-Everything but some `pixman_image_*` API.  
-Examples.  
-Test Darwin and Windows compatibility.
+### TODO list
+* Everything but some `pixman_image_*` API.  
+* Examples.  
+* Test Darwin and Windows compatibility.
 
