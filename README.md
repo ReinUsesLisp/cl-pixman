@@ -1,12 +1,13 @@
 # cl-pixman
 `cl-pixman` is a Common Lisp wrapper for [pixman](http://pixman.org) written
-on CFFI. Pixman is a portable library for pixel manipulation.
-It is licensed under the LLGPL.
+on CFFI. Pixman is a portable library for low-level pixel manipulation.  
 
 I wrote this wrapper to have an alternative to SDL2 blitting for low-level
 pixel operation. It directly uses CFFI pointers to avoid.
 Supported API is minimal (only `pixman_image_*` API is partially implemented)
-so feel free to contribute.
+so feel free to contribute.  
+
+It is licensed under the LLGPL.
 
 ## Installation
 If you are using [Quicklisp](http://www.quicklisp.org/beta/):  
