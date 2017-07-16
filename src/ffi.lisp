@@ -19,7 +19,7 @@
 
 (define-foreign-library pixman
   (:darwin (:or "libpixman-1.0.dylib"
-		"libpixman-1.dylib"))
+                "libpixman-1.dylib"))
   (:unix (:or "libpixman-1.so.0.34.0"
               "libpixman-1.so.0"
               "libpixman-1.so"))
