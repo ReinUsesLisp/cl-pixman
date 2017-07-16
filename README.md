@@ -32,5 +32,4 @@ if you are using GNU, you can use your distro package.
 ### TODO list
 * Everything but some `pixman_image_*` API.  
 * Examples.  
-* Test Darwin and Windows compatibility.
 
