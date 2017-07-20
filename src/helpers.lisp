@@ -38,3 +38,19 @@
        (unless ,rc
          (error "Pixman error."))
        ,rc)))
+
+(defun build-list-from-memory (pointer num type)
+  (loop with stride = (foreign-type-size type)
+     for i from 0 to (1- num)
+     collect (prog1 pointer
+               (incf-pointer pointer stride))))
+
+(defun build-memory-from-list (list type &optional (gc t))
+  (let* ((num (length list))
+         (mem (foreign-alloc type :count num)))
+    (loop for i from 0 to (1- num)
+       for element in list
+       do (setf (mem-aref mem type i) (mem-aref element type)))
+    (if gc
+	(collect mem)
+	mem)))

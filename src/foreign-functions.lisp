@@ -247,7 +247,11 @@
   (stops (:pointer (:struct gradient-stop)))
   (num-stops :int))
 
-;;(defcfun "pixman_image_create_conical_gradient"
+(defcfun "pixman_image_create_conical_gradient" image
+  (center (:pointer (:struct point-fixed)))
+  (angle fixed)
+  (stops (:pointer (:struct gradient-stop)))
+  (num-stops :int))
 
 (defcfun "pixman_image_create_bits" image
   (format format-code)
@@ -270,6 +274,47 @@
   (image image))
 
 ;;; properties
+;;; TODO pixman_image_set_accessors
+;;; TODO pixman_image_set_indexed
+
+(defcfun (image-set-clip-region "pixman_image_set_clip_region") :boolean
+  (image image)
+  (region (:pointer (:struct region16))))
+
+(defcfun (image-set-has-client-clip "pixman_image_set_has_client_clip") :void
+  (image image)
+  (client-clip :boolean))
+
+(defcfun (image-set-transform "pixman_image_set_transform") :boolean
+  (image image)
+  (transform (:pointer (:struct transform))))
+
+(defcfun (image-set-repeat "pixman_image_set_repeat") :void
+  (image image)
+  (repeat repeat))
+
+(defcfun "pixman_image_set_filter" :boolean
+  (image image)
+  (filter filter)
+  (filter-params (:pointer fixed))
+  (num-filter-params :int))
+
+(defcfun (image-set-source-clipping "pixman_image_set_source_clipping") :void
+  (image image)
+  (source-clipping :boolean))
+
+(defcfun (image-set-alpha-map "pixman_image_set_alpha_map") :void
+  (image image)
+  (alpha-map image)
+  (x :int16)
+  (y :int16))
+
+(defcfun (image-set-component-alpha "pixman_image_set_component_alpha") :void
+  (image image)
+  (component-alpha :boolean))
+
+(defcfun (image-get-component-alpha "pixman_image_get_component_alpha") :boolean
+  (image image))
 
 (defcfun (image-get-data "pixman_image_get_data") (:pointer :uint32)
   (image image))
@@ -290,6 +335,14 @@
   (image image))
 
 ;;; composite
+
+(defcfun (compute-composite-region "pixman_image_composite_region") :boolean
+  (region (:pointer (:struct region16)))
+  (src-image image) (mask-image image) (dest-image image)
+  (src-x :int16) (src-y :int16)
+  (mask-x :int16) (mask-y :int16)
+  (dest-x :int16) (dest-y :int16)
+  (width :uint16) (height :uint16))
 
 (defcfun (image-composite "pixman_image_composite") :void
   (op op)

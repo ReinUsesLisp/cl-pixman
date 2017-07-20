@@ -21,17 +21,38 @@
 (defun null-image ()
   (null-pointer))
 
+(defun imgcollect (image)
+  (collect image #'pixman-image-unref))
+
 (defun image-create-solid-fill (color)
-  (collect (pixman-image-create-solid-fill color)
-    #'pixman-image-unref))
+  (imgcollect (pixman-image-create-solid-fill color)))
+
+(defun image-create-linear-gradient (point1 point2 stops)
+  (imgcollect (pixman-image-create-linear-gradient
+	       point1 point2
+	       (build-memory-from-list stops '(:struct gradient-stops))
+	       (length stops))))
+
+(defun image-create-conical-gradient (inner outer inner-radius outer-radius
+			              stops)
+  (imgcollect (pixman-image-create-radial-gradient
+               inner outer inner-radius outer-radius
+               (build-memory-from-list stops '(:struct gradient-stops))
+               (length stops))))
+
+(defun image-create-conical-gradient (center angle stops)
+  (imgcollect (pixman-image-create-conical-gradient
+               center angle
+               (build-memory-from-list stops '(:struct gradient-stops))
+               (length stops))))
 
 (defun image-create-bits (format width height bits rowstride-bytes)
-  (collect (pixman-image-create-bits format width height bits rowstride-bytes)
-    #'pixman-image-unref))
+  (imgcollect
+   (pixman-image-create-bits format width height bits rowstride-bytes)))
 
 (defun image-create-bits-no-clear (format width height bits rowstride-bytes)
-  (collect (pixman-image-create-bits-no-clear format width height bits rowstride-bytes)
-    #'pixman-image-unref))
+  (imgcollect (pixman-image-create-bits-no-clear
+	       format width height bits rowstride-bytes)))
 
 (defun image-unref (image)
   (tg:cancel-finalization image)

@@ -73,10 +73,9 @@
   (not (pixman-region-not-empty region)))
 
 (defun region-rectangles (region)
-  (loop with rects-ptr = (pixman-region-rectangles region (null-pointer))
-     for i from 0 to (1- (region-num-rects region))
-     collect (prog1 rects-ptr
-               (incf-pointer rects-ptr (foreign-type-size '(:struct box16))))))
+  (build-list-from-memory (pixman-region-rectangles region (null-pointer))
+			  (region-num-rects region)
+			  '(:struct box16)))
 
 (defun region-equal (&rest regions)
   (let ((region1 (first regions)))

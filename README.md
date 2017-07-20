@@ -30,6 +30,11 @@ if you are using GNU, you can use your distro package.
 * CCL 1.11-r16635 on Windows 7 on amd64 (pixman.dll built from VS 2017).
 
 ### TODO list
-* Everything but some `pixman_image_*` API.  
-* Examples.  
-
+* 32bits functions and structures
+* Floating point matrices
+* Image accessors callbacks and indexed images
+* pixman_filter_create_separable_convolution, pixman_image_fill_rectangles, pixman_image_fill_boxes
+* Glyphs
+* Trapezoids
+* Examples and tests
+* Simple fixed-point computations?

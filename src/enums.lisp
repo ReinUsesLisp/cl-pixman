@@ -86,7 +86,7 @@
 
 (defcenum op
   (:clear #x00)
-  (:src	#x01)
+  (:src #x01)
   (:dst #x02)
   (:over #x03)
   (:over-reverse #x04)
