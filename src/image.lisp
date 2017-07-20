@@ -36,16 +36,3 @@
 (defun image-unref (image)
   (tg:cancel-finalization image)
   (pixman-image-unref image))
-
-(defun make-color (red green blue alpha)
-  (declare (type (unsigned-byte 16) red green blue alpha))
-  (let ((color (foreign-alloc '(:struct color))))
-    (setf (foreign-slot-value color '(:struct color) 'red) red
-          (foreign-slot-value color '(:struct color) 'green) green
-          (foreign-slot-value color '(:struct color) 'blue) blue
-          (foreign-slot-value color '(:struct color) 'alpha) alpha)
-    (collect color)))
-
-;;; use pixman_image_composite32 as default
-(eval-when (:compile-toplevel :load-toplevel :execute)
-  (setf (fdefinition 'image-composite) #'image-composite32))

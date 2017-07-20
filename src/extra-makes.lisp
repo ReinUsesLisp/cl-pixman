@@ -17,24 +17,22 @@
 
 (in-package :pixman)
 
-(defun build-format (bpp type a r g b)
-  (logior (ash bpp 24)
-          (ash (foreign-enum-value 'type type) 16)
-          (ash a 12)
-          (ash r 8)
-          (ash g 4)
-          b))
+(defmacro define-maker ((name &optional (type name)) vars &body prebody)
+  (with-gensyms (res)
+    `(defun ,(symbolicate 'make- name) ,vars
+       ,@prebody
+       (let ((,res (foreign-alloc '(:struct ,type))))
+         ,@(loop for slot in vars
+              collect `(setf (foreign-slot-value ,res '(:struct ,type) ',slot)
+                             ,slot))
+         (collect ,res)))))
 
-(defun collect (ptr &optional (function #'foreign-free))
-  (let ((address (pointer-address ptr)))
-    (tg:finalize ptr
-                 (lambda ()
-                   (funcall function (make-pointer address))))
-    ptr))
+(define-maker (box box16) (x1 y1 x2 y2)
+  (declare (type (signed-byte 16) x1 y1 x2 y2)))
 
-(defmacro check-true (form)
-  (with-gensyms (rc)
-    `(let ((,rc ,form))
-       (unless ,rc
-         (error "Pixman error."))
-       ,rc)))
+(define-maker (color) (red green blue alpha)
+  (declare (type (unsigned-byte 16) red green blue alpha)))
+
+(define-maker (transform) ())
+
+(define-maker (gradient-stop) (x color))

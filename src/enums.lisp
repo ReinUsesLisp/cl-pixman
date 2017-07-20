@@ -17,14 +17,6 @@
 
 (in-package :pixman)
 
-(define-foreign-library pixman
-  (:darwin (:or "libpixman-1.0.dylib"
-                "libpixman-1.dylib"))
-  (:unix (:or "libpixman-1.so.0.34.0"
-              "libpixman-1.so.0"
-              "libpixman-1.so"))
-  (t (:default "pixman")))
-
 (use-foreign-library pixman)
 
 (defcenum type
@@ -150,69 +142,11 @@
   (:hsl-color #x3d)
   (:hsl-luminosity #x3e))
 
-(defctype image :pointer)
+(defcenum repeat
+  :none :normal :pad :reflect)
 
-(defcstruct color
-  (red :uint16)
-  (green :uint16)
-  (blue :uint16)
-  (alpha :uint16))
+(defcenum filter
+  :fast :good :best :nearest :bilinear :convolution :separable-convolution)
 
-(defcfun "pixman_image_create_solid_fill" image
-  (color (:pointer (:struct color))))
-
-(defcfun "pixman_image_create_bits" image
-  (format format-code)
-  (width :int)
-  (height :int)
-  (bits (:pointer :uint32))
-  (rowstride-bytes :int))
-
-(defcfun "pixman_image_create_bits_no_clear" image
-  (format format-code)
-  (width :int)
-  (height :int)
-  (bits (:pointer :uint32))
-  (rowstride-bytes :int))
-
-(defcfun (image-ref "pixman_image_ref") image
-  (image image))
-
-(defcfun "pixman_image_unref" :boolean
-  (image image))
-
-;;; properties
-(defcfun (image-get-data "pixman_image_get_data") (:pointer :uint32)
-  (image image))
-
-(defcfun (image-get-width "pixman_image_get_width") :int
-  (image image))
-
-(defcfun (image-get-height "pixman_image_get_height") :int
-  (image image))
-
-(defcfun (image-get-stride "pixman_image_get_stride") :int
-  (image image))
-
-(defcfun (image-get-depth "pixman_image_get_depth") :int
-  (image image))
-
-(defcfun (image-get-format "pixman_image_get_format") format-code
-  (image image))
-
-;;; composite
-(defcfun (image-composite16 "pixman_image_composite") :void
-  (op op)
-  (src image) (mask image) (dest image)
-  (src-x :int16) (src-y :int16)
-  (mask-x :int16) (mask-y :int16)
-  (dest-x :int16) (dest-y :int16)
-  (width :uint16) (height :uint16))
-
-(defcfun (image-composite32 "pixman_image_composite32") :void
-  (op op)
-  (src image) (mask image) (dest image)
-  (src-x :int32) (src-y :int32)
-  (mask-x :int32) (mask-y :int32)
-  (dest-x :int32) (dest-y :int32)
-  (width :uint32) (height :uint32))
+(defcenum region-overlap
+  :out :in :part)

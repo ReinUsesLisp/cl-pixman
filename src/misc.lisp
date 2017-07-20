@@ -17,24 +17,9 @@
 
 (in-package :pixman)
 
-(defun build-format (bpp type a r g b)
-  (logior (ash bpp 24)
-          (ash (foreign-enum-value 'type type) 16)
-          (ash a 12)
-          (ash r 8)
-          (ash g 4)
-          b))
+(defun version ()
+  (let ((version (pixman-version)))
+    (values (floor version 10000)
+            (mod (floor version 100) 100)
+            (mod version 100))))
 
-(defun collect (ptr &optional (function #'foreign-free))
-  (let ((address (pointer-address ptr)))
-    (tg:finalize ptr
-                 (lambda ()
-                   (funcall function (make-pointer address))))
-    ptr))
-
-(defmacro check-true (form)
-  (with-gensyms (rc)
-    `(let ((,rc ,form))
-       (unless ,rc
-         (error "Pixman error."))
-       ,rc)))

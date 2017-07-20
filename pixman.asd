@@ -19,10 +19,17 @@
   :description "Low-level pixel manipulation."
   :author "ReinUsesLisp <reinuseslisp@airmail.cc>"
   :license "LLGPL"
-  :depends-on (:cffi :trivial-garbage)
+  :depends-on (:cffi :trivial-garbage :alexandria)
   :pathname "src"
   :serial t
   :components ((:file "package")
                (:file "helpers")
-               (:file "ffi")
-               (:file "pixman")))
+               (:file "foreign-library")
+               (:file "types")
+               (:file "enums")
+               (:file "foreign-functions")
+               (:file "extra-makes")
+               (:file "misc")
+               (:file "region")
+               (:file "manipulation")
+               (:file "image")))

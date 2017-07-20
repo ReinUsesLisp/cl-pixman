@@ -16,7 +16,7 @@
 ;;;;
 
 (defpackage :pixman
-  (:use #:cl #:cffi)
+  (:use #:cl #:cffi #:alexandria)
   (:export
    ;; ffi.lisp
    #:image-ref
@@ -26,8 +26,7 @@
    #:image-get-stride
    #:image-get-depth
    #:image-get-format
-   #:image-composite16
-   #:image-composite32
+   #:image-composite
    ;; pixman.lisp
    #:null-image
    #:image-create-solid-fill

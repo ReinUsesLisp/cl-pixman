@@ -17,24 +17,10 @@
 
 (in-package :pixman)
 
-(defun build-format (bpp type a r g b)
-  (logior (ash bpp 24)
-          (ash (foreign-enum-value 'type type) 16)
-          (ash a 12)
-          (ash r 8)
-          (ash g 4)
-          b))
-
-(defun collect (ptr &optional (function #'foreign-free))
-  (let ((address (pointer-address ptr)))
-    (tg:finalize ptr
-                 (lambda ()
-                   (funcall function (make-pointer address))))
-    ptr))
-
-(defmacro check-true (form)
-  (with-gensyms (rc)
-    `(let ((,rc ,form))
-       (unless ,rc
-         (error "Pixman error."))
-       ,rc)))
+(define-foreign-library pixman
+  (:darwin (:or "libpixman-1.0.dylib"
+                "libpixman-1.dylib"))
+  (:unix (:or "libpixman-1.so.0.34.0"
+              "libpixman-1.so.0"
+              "libpixman-1.so"))
+  (t (:default "pixman")))
