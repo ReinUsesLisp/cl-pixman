@@ -105,4 +105,12 @@
    #:image-get-format
    ;; composite
    #:compute-composite-region
-   #:image-composite))
+   #:image-composite
+   ;; types
+   #:fixed-to-int
+   #:int-to-fixed
+   #:fixed-to-double
+   #:fixed-frac
+   #:fixed-ceil
+   #:fixed-fraction
+   #:fixed-mod-2))
