@@ -30,9 +30,9 @@
 
 (eval-when (:compile-toplevel :load-toplevel :execute)
   (defun fixed-to-int (fixed)
-    (ash fixed 16))
+    (ash fixed -16))
   (defun int-to-fixed (int)
-    (ash int -16)))
+    (ash int 16)))
 
 (defconstant +fixed-e+ 1)
 (defconstant +fixed-1+ (int-to-fixed 1))
@@ -45,7 +45,7 @@
   (defun fixed-to-double (fixed)
     (/ (float fixed) (float +fixed-1+)))
   (defun double-to-fixed (double)
-    (* double #.(float #x10000)))
+    (floor (* double #.(float #x10000))))
   (defun fixed-frac (fixed)
     (logand fixed +fixed-1-minus-e+))
   (defun fixed-floor (fixed)
