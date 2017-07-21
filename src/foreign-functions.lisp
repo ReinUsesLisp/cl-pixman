@@ -29,6 +29,7 @@
   (dst-x :int) (dst-y :int)
   (width :int) (height :int))
 
+;;; pixman-fill instead of fill because CL uses that symbol name
 (defcfun (pixman-fill "pixman_fill") :boolean
   (bits (:pointer :uint32))
   (stride :int)
@@ -336,7 +337,7 @@
 
 ;;; composite
 
-(defcfun (compute-composite-region "pixman_image_composite_region") :boolean
+(defcfun "pixman_image_composite_region" :boolean
   (region (:pointer (:struct region16)))
   (src-image image) (mask-image image) (dest-image image)
   (src-x :int16) (src-y :int16)
