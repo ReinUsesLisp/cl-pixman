@@ -76,6 +76,7 @@
    #:region-reset
    #:region-clear
    ;; image
+   #:null-image
    #:image-create-solid-fill
    #:image-create-linear-gradient
    #:image-create-radial-gradient
