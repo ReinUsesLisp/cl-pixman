@@ -23,6 +23,7 @@
    #:make-color
    #:make-transform
    #:make-gradient-stop
+   #:make-point-fixed
    ;; misc
    #:blt
    #:pixman-fill

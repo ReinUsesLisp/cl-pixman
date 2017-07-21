@@ -36,3 +36,5 @@
 (define-maker (transform) ())
 
 (define-maker (gradient-stop) (x color))
+
+(define-maker (point-fixed) (x y))
