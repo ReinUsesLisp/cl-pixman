@@ -30,20 +30,20 @@
 (defun image-create-linear-gradient (point1 point2 stops)
   (imgcollect (pixman-image-create-linear-gradient
 	       point1 point2
-	       (build-memory-from-list stops '(:struct gradient-stops))
+	       (build-memory-from-list stops '(:struct gradient-stop))
 	       (length stops))))
 
 (defun image-create-radial-gradient (inner outer inner-radius outer-radius
 			              stops)
   (imgcollect (pixman-image-create-radial-gradient
                inner outer inner-radius outer-radius
-               (build-memory-from-list stops '(:struct gradient-stops))
+               (build-memory-from-list stops '(:struct gradient-stop))
                (length stops))))
 
 (defun image-create-conical-gradient (center angle stops)
   (imgcollect (pixman-image-create-conical-gradient
                center angle
-               (build-memory-from-list stops '(:struct gradient-stops))
+               (build-memory-from-list stops '(:struct gradient-stop))
                (length stops))))
 
 (defun image-create-bits (format width height bits rowstride-bytes)
