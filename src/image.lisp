@@ -33,7 +33,7 @@
 	       (build-memory-from-list stops '(:struct gradient-stops))
 	       (length stops))))
 
-(defun image-create-conical-gradient (inner outer inner-radius outer-radius
+(defun image-create-radial-gradient (inner outer inner-radius outer-radius
 			              stops)
   (imgcollect (pixman-image-create-radial-gradient
                inner outer inner-radius outer-radius

@@ -18,21 +18,89 @@
 (defpackage :pixman
   (:use #:cl #:cffi #:alexandria)
   (:export
-   ;; ffi.lisp
-   #:image-ref
+   ;; extra-makes
+   #:make-box
+   #:make-color
+   #:make-transform
+   #:make-gradient-stop
+   ;; misc
+   #:blt
+   #:pixman-fill
+   #:version
+   #:version-string
+   ;; transform
+   #:transform-init-identity
+   #:transform-point-3d
+   #:transform-point
+   #:transform-multiply
+   #:transform-init-scale
+   #:transform-scale
+   #:transform-init-rotate
+   #:transform-rotate
+   #:transform-init-translate
+   #:transform-translate
+   #:transform-bounds
+   #:transform-invert
+   #:transform-identity-p
+   #:transform-scale-p
+   #:transform-int-translate-p
+   #:transform-inverse-p
+   ;; region
+   #:make-region
+   #:make-region-rect
+   #:make-region-rects
+   #:make-region-with-extents
+   #:make-region-init-from-image
+   #:region-fini
+   ;; manipulation
+   #:region-copy
+   #:region-translate
+   #:region-intersect
+   #:region-union
+   #:region-union-rect
+   #:region-nunion-rect
+   #:region-intersect-rect
+   #:region-nintersect-rect
+   #:region-subtract
+   #:region-ninverse
+   #:region-inverse
+   #:region-empty-p
+   #:region-rectangles
+   #:region-equal
+   #:region-print
+   #:region-contains-point-p
+   #:region-contains-rectangle
+   #:region-extents
+   #:region-num-rects
+   #:region-selfcheck
+   #:region-reset
+   #:region-clear
+   ;; image
+   #:image-create-solid-fill
+   #:image-create-linear-gradient
+   #:image-create-radial-gradient
+   #:image-create-conical-gradient
+   #:image-create-bits
+   #:image-create-bits-no-clear
+   #:image-unref
+   #:format-supported-destionation
+   #:format-supported-source
+   ;; properties
+   #:image-set-clip-region
+   #:image-set-has-client-clip
+   #:image-set-transform
+   #:image-set-repeat
+   #:image-set-filter
+   #:image-set-source-clipping
+   #:image-set-alpha-map
+   #:image-set-component-alpha
+   #:image-get-component-alpha
    #:image-get-data
    #:image-get-width
    #:image-get-height
    #:image-get-stride
    #:image-get-depth
    #:image-get-format
-   #:image-composite
-   ;; pixman.lisp
-   #:null-image
-   #:image-create-solid-fill
-   #:image-create-bits
-   #:image-create-bits-no-clear
-   #:image-unref
-   #:image-composite
-   #:make-color))
-
+   ;; composite
+   #:compute-composite-region
+   #:image-composite))

@@ -337,7 +337,7 @@
 
 ;;; composite
 
-(defcfun "pixman_image_composite_region" :boolean
+(defcfun "pixman_compute_composite_region" :boolean
   (region (:pointer (:struct region16)))
   (src-image image) (mask-image image) (dest-image image)
   (src-x :int16) (src-y :int16)
