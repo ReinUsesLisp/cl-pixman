@@ -29,6 +29,7 @@
 (defctype fixed fixed-16-16)
 
 (eval-when (:compile-toplevel :load-toplevel :execute)
+  (declaim (inline fixed-to-int int-to-fixed))
   (defun fixed-to-int (fixed)
     (ash fixed -16))
   (defun int-to-fixed (int)
@@ -42,6 +43,8 @@
 (defconstant +min-fixed-48-16+ (- (ash 1 -31)))
 
 (eval-when (:compile-toplevel :load-toplevel :execute)
+  (declaim (inline fixed-to-double double-to-fixed fixed-frac fixed-floor
+                   fixed-ceil fixed-fraction fixed-mod-2))
   (defun fixed-to-double (fixed)
     (/ (float fixed) (float +fixed-1+)))
   (defun double-to-fixed (double)
