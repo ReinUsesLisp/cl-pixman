@@ -117,6 +117,7 @@
    #:fixed-to-int
    #:int-to-fixed
    #:fixed-to-double
+   #:double-to-fixed
    #:fixed-frac
    #:fixed-ceil
    #:fixed-fraction
