@@ -15,24 +15,36 @@
 ;;;;    along with cl-pixman.  If not, see <http://www.gnu.org/licenses/>.
 ;;;;
 
-(asdf:defsystem #:pixman
-  :description "Low-level pixel manipulation."
-  :author "ReinUsesLisp <reinuseslisp@airmail.cc>"
-  :license "LLGPL"
-  :depends-on (:cffi :trivial-garbage :alexandria)
-  :pathname "src"
-  :serial t
-  :components ((:file "package")
-               (:file "helpers")
-               (:file "foreign-library")
-               (:file "types")
-               (:file "enums")
-               (:file "foreign-functions")
-               (:file "extra-makes")
-               (:file "misc")
-               (:file "region")
-               (:file "manipulation")
-               (:file "image")
-	       (:file "properties")
-	       (:file "composite")
-               (:file "functional")))
+(in-package :pixman)
+
+(defmacro with-transform ((name) &body body)
+  `(let ((,name (make-transform)))
+     ,@body))
+
+(defmacro with-transforms (names &body body)
+  (if names
+      `(with-transform (,(first names))
+         (with-transforms ,(rest names)
+           ,@body))
+      `(progn ,@body)))
+
+(defmacro a-transform (&body body)
+  `(with-transform (it)
+     ,@body
+     it))
+
+(defun make-identity ()
+  (a-transform
+    (transform-init-identity it)))
+
+(defun make-translate (x y)
+  (a-transform
+    (transform-init-translate it x y)))
+
+(defun make-scale (x y)
+  (a-transform
+    (transform-init-scale it x y)))
+
+(defun make-rotate (cos sin)
+  (a-transform
+    (transform-init-rotate it cos sin)))

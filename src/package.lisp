@@ -87,6 +87,13 @@
    #:image-unref
    #:format-supported-destionation
    #:format-supported-source
+   ;; functional
+   #:with-transform
+   #:with-transforms
+   #:make-identity
+   #:make-translate
+   #:make-scale
+   #:make-rotate
    ;; properties
    #:image-set-clip-region
    #:image-set-has-client-clip
